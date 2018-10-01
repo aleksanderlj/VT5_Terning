@@ -49,29 +49,30 @@ class DiceTest {
 
     @org.junit.jupiter.api.Test
     void rollMultiple() {
-        int a1=0, a2=0, a3=0, a4=0, a5=0, a6=0;
+        int a1=0, a2=0, a3=0, a4=0, a5=0, a6=0; //Antal gange hver side bliver ramt
 
+        //Ruller terningen 60.000 gange
         while(a1 + a2 + a3 + a4 + a5 + a6 <= 60000) {
 
             int roll = minTest.roll();
 
             if (roll == 1) {
-                a1 = a1++;
+                a1++;
             }
             if (roll == 2) {
-                a2 = a2++;
+                a2++;
             }
             if (roll == 3) {
-                a3 = a3++;
+                a3++;
             }
             if (roll == 4) {
-                a4 = a4++;
+                a4++;
             }
             if (roll == 5) {
-                a5 = a5++;
+                a5++;
             }
             if (roll == 6) {
-                a6 = a6++;
+                a6++;
             }
         }
         System.out.println("Antal 1'ere " + a1);
@@ -80,6 +81,8 @@ class DiceTest {
         System.out.println("Antal 4'ere " + a4);
         System.out.println("Antal 5'ere " + a5);
         System.out.println("Antal 6'ere " + a6);
+
+        //Tester om hver side af terningen er blevet ramt lige mange gange (10000 +-400)
         assertTrue(a1 <= 10400 && a1  >= 9600
                 && a2 <= 10400 && a2  >= 9600
                 && a3 <= 10400 && a4  >= 9600

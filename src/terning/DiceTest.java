@@ -8,15 +8,15 @@ class DiceTest {
 
     @org.junit.jupiter.api.Test
     void roll() {
-        int expectedFace = 6; //Terningen skal ramme alle 6 sider på et eller andet tidspunkt
+        //Tester om terningen holder sig til værdierne 1-6 samt om alle 6 sider kan blive ramt
+        final int EXPECTEDFACE = 6;
         int actualFace = 0;
         int face1 = 0, face2 = 0, face3 = 0, face4 = 0, face5 = 0, face6 = 0;
 
-        //Kører testen 60.000 gange for at sikre, at tilfældighed spiller en minimal rolle
+        //Testen køres 60.000 gange for at sikre, at tilfældighed spiller en minimal rolle
         for(int i = 0;(i<=60000); i++){
-            //Tester om terningen holder sig inden for værdierne 1-6
             int roll = minTest.roll();
-            assertTrue(roll>0 && roll<7);
+            assertTrue(roll>0 && roll<7); //Tester om terningen holder sig inden for værdierne 1-6
 
             //Tester om terningen rammer alle sider på et eller andet tidspunkt
             if (roll==1 && face1==0) {
@@ -44,11 +44,12 @@ class DiceTest {
                 actualFace++;
             }
         }
-        assertEquals(expectedFace, actualFace);
+        assertEquals(EXPECTEDFACE, actualFace);
     }
 
     @org.junit.jupiter.api.Test
     void rollMultiple() {
+        //Tester om hver side af terningen er blevet ramt lige mange gange (10000 +-400)
         int a1=0, a2=0, a3=0, a4=0, a5=0, a6=0; //Antal gange hver side bliver ramt
 
         //Ruller terningen 60.000 gange
@@ -82,7 +83,6 @@ class DiceTest {
         System.out.println("Antal 5'ere " + a5);
         System.out.println("Antal 6'ere " + a6);
 
-        //Tester om hver side af terningen er blevet ramt lige mange gange (10000 +-400)
         assertTrue(a1 <= 10400 && a1  >= 9600
                 && a2 <= 10400 && a2  >= 9600
                 && a3 <= 10400 && a4  >= 9600
@@ -90,5 +90,7 @@ class DiceTest {
                 && a5 <= 10400 && a5  >= 9600
                 && a6 <= 10400 && a6  >= 9600);
 
+        //Metoden rollMultiple() ruller én mindre det angivet antal gange, men da metoden returnerer void, kan dette ikke JUnit testes med assertEquals()
+        minTest.rollMultiple(5); //Der kan dog stadig testes ved bare at køre kommandoen og se nede i cmd hvad den giver tilbage
     }
 }
